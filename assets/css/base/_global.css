@@ -5,7 +5,8 @@ body {
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
     background: #2020;
-    /* color: black; */
+    color: black;
+    
     /* font-size: 2rem; */
 }
 

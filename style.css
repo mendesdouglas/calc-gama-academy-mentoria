@@ -3,21 +3,33 @@
 @import url('./assets/css/base/_fonts.css');
 /* @import url('./assets/css/components/__calculator.css'); */
 
+body{
+    background: #2020;
+}
 .container{
     max-width: 40rem;
     width: 32rem;
     border-radius: 3rem;
     margin: 1rem auto 0 auto;
-    background-image: linear-gradient(to top right, #7b37da, #202020);
+    
+    background-image: linear-gradient(to top right, #7C37DD, #101010);
 }
 
-.logo{
-    text-align: center;
-    
-    padding: 0.6rem;
-    height: 2.6rem;
-    font-size: 2rem;
 
+.logo{
+    
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    color: #69DE5A;
+    height: 4rem;
+    padding-top: 1rem;
+    
+    border-radius: 3rem 3rem 0 0;
+
+    font-size: 2rem;
+    background-image: linear-gradient(10deg, #2E243B, #101010);
+    
 }
 
 #display {
@@ -28,8 +40,14 @@
     line-height: 7rem;
     padding: 1.5rem 0.8rem;
     font-size: 7em;
-    background-image: linear-gradient(to top right, #7b37da, #202020);
+    background-image: linear-gradient(45deg, #7b37da, #101010);
 }
+
+.sub-display{
+    font-size: 3rem;
+    
+}
+
 
 .buttons{
     display: grid;
