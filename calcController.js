@@ -63,10 +63,15 @@ class CalcController{
 
 
         }else{
-            console.log('addOperation-isNaN false-', value)
-            let newValue = this.getLastOperation().toString() + value.toString()
-            this.setLastOperation(newValue)
-            console.log(this._operation)
+            if(this.isOperator(value)){
+                this._operation.push(value)
+            }else{
+                //console.log('addOperation-isNaN false-', value)
+                let newValue = this.getLastOperation().toString() + value.toString()
+                this.setLastOperation(parseInt(newValue))
+                console.log(this._operation)
+            }
+            
 
         }
         
