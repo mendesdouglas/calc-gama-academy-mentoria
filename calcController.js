@@ -5,14 +5,25 @@ class CalcController{
         
         this._currentDate
         this.initialize()
+        this.initButtonsEvents()
     }
 
     //used to initialize elements
     initialize(){
-        
-
         this._displayCalcElement.innerHTML = "123454"
         this._subDisplayCalcElement.innerHTML='50x20'
+    }
+
+    initButtonsEvents(){
+        let buttonsElements = document.querySelectorAll(".buttons > div")
+        
+        buttonsElements.forEach((btn, index)=> {
+            btn.addEventListener('click', (e) => {
+                console.log(btn.className.replace('button btn-', ''))
+
+            })
+        })
+
     }
 
     get displayCalc(){
