@@ -48,9 +48,10 @@ class CalcController{
     }
 
     addOperation(value){
+        console.log('A', isNaN(this.getLastOperation()))
         
         if(isNaN(this.getLastOperation())){
-            console.log('false', typeof(value))
+            console.log('false - type', typeof(value), this._operation)
 
             if(this.isOperator(value)){
                 console.log('deve ser operador false and true', typeof(value))
@@ -64,7 +65,7 @@ class CalcController{
         }else{
             console.log('addOperation-isNaN false-', value)
             let newValue = this.getLastOperation().toString() + value.toString()
-            this._operation.push(value)
+            this.setLastOperation(newValue)
             console.log(this._operation)
 
         }
@@ -113,7 +114,7 @@ class CalcController{
                 break
                               
 
-            case '0':
+            case '0 zero':
             case '1':
             case '2':
             case '3':
