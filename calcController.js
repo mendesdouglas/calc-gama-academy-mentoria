@@ -33,6 +33,7 @@ class CalcController{
     }
 
     addOperation(value){
+        console.log('value - ', value)
         this._expressions.push(value)
         console.log(this._expressions)
     }
@@ -75,46 +76,20 @@ class CalcController{
                 console.log('cliquei na dot')
                               
 
-            case '0 zero':
-                console.log('cliquei na 0')
-            
+            case '0':
             case '1':
-                console.log('cliquei na 1')
-                
-
             case '2':
-                console.log('cliquei na 2')
-                
-
             case '3':
-                console.log('cliquei na 3')
-
             case '4':
-                console.log('cliquei na 4')
-                
-
             case '5':
-                console.log('cliquei na 5')
-                
-
             case '6':
-                console.log('cliquei na 6')
-
             case '7':
-                console.log('cliquei na 7')
-                
-
-            case '8':
-                console.log('cliquei na 8')
-                
-
+            case '8':    
             case '9':
-                this.addOperation(parseInt(value))
-                break
-        
+                this.addOperation(parseInt(value));
+                break;
             default:
                 this.setError();
-                break;
     
         }
     }
@@ -124,7 +99,7 @@ class CalcController{
         
         buttonsElements.forEach((btn, index)=> {
             this.addEventListenerAll(btn, 'click drag', (e) => {
-                console.log(btn.className.replace('button btn-', ''))
+                console.log('btn', btn.className.replace('button btn-', ''))
                 let buttonsText = btn.className.replace('button btn-', '')
                 this.execButton(buttonsText);
 
