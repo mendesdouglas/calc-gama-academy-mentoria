@@ -1,6 +1,6 @@
 class CalcController{
     constructor(){
-        this._expressions = []
+        this._operation = []
         this._displayCalcElement = document.querySelector('.main-display')
         this._subDisplayCalcElement = document.querySelector('.sub-display')
         
@@ -22,7 +22,7 @@ class CalcController{
     }
 
     clearAll(){
-        this._expressions = []
+        this._operation = []
     }
 
     
@@ -32,40 +32,76 @@ class CalcController{
         this.displayCalc = "ERROR"
     }
 
+    getLastOperation(){
+        return this._operation[this._operation.length - 1]
+
+    }
+
+    setLastOperation(value) {
+
+        this._operation[this._operation.length - 1] = value;
+
+    }
+
+    isOperator(value) {
+        return (['+', '-', '*', '%', '/'].indexOf(value) > -1);
+    }
+
     addOperation(value){
-        console.log('value - ', value)
-        this._expressions.push(value)
-        console.log(this._expressions)
+        
+        if(isNaN(this.getLastOperation())){
+            console.log('false', typeof(value))
+
+            if(this.isOperator(value)){
+                console.log('deve ser operador false and true', typeof(value))
+                this.setLastOperator(value)
+            }else{
+                console.log('deve ser um numero false and false', typeof(value))
+                this._operation.push(value)
+            }
+
+
+        }else{
+            console.log('addOperation-isNaN false-', value)
+            let newValue = this.getLastOperation().toString() + value.toString()
+            this._operation.push(value)
+            console.log(this._operation)
+
+        }
+        
+        
     }
 
     execButton(value){
         switch(value){
+
+            case 'plus':
+                console.log('plus')
+                this.addOperation('+');
+                break
+
             case 'C grow':
                 this.clearAll();
                 break
 
             case 'percent':
-                console.log('cliquei na percent')
+                this.addOperation('%');
                 break
             
             case 'slash':
-                console.log('cliquei na /')
+                this.addOperation('/');
                 break
 
             case 'arrow':
-                console.log('cliquei na backspace')
+                console.log('cliquei na equal')
                 break
                 
             case 'ast':
-                console.log('cliquei na *')
+                this.addOperation('*');
                 break
             
             case 'dash':
-                console.log('cliquei na -')
-                break
-
-            case 'plus':
-                console.log('cliquei na plus')
+                this.addOperation('-');
                 break
 
             case 'equal':
@@ -74,6 +110,7 @@ class CalcController{
 
             case 'dot':
                 console.log('cliquei na dot')
+                break
                               
 
             case '0':
@@ -99,7 +136,7 @@ class CalcController{
         
         buttonsElements.forEach((btn, index)=> {
             this.addEventListenerAll(btn, 'click drag', (e) => {
-                console.log('btn', btn.className.replace('button btn-', ''))
+                console.log('btn initelment', btn.className.replace('button btn-', ''))
                 let buttonsText = btn.className.replace('button btn-', '')
                 this.execButton(buttonsText);
 
