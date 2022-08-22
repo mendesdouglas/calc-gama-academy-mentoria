@@ -12,7 +12,7 @@ class CalcController{
     //used to initialize elements
     initialize(){
         this._displayCalcElement.innerHTML = "0"
-        this._subDisplayCalcElement.innerHTML='50x20'
+        this._subDisplayCalcElement.innerHTML='0'
     }
 
     addEventListenerAll(element, events, fn){
@@ -22,7 +22,19 @@ class CalcController{
     }
 
     clearAll(){
-        this._operation = []
+        console.log('clicked clearall')
+        this._newElement = []
+        this._operation = this._newElement
+        this.displayCalc = '0'
+        this.subDisplayCalc = '0'
+    }
+
+    clearEntry() {
+
+        this._operation.pop();
+
+        this.setLastNumberToDisplay();
+
     }
 
     
@@ -59,13 +71,36 @@ class CalcController{
         }
     }
 
-    calc(){
-        let last = this._operation.pop()
-        
+    calcFromEqual(){
+        let expr = this._operation
+        console.log(expr)
         let result = eval(this._operation.join(""))
+        console.log(result)
+        this.displayCalc = result
+        this.subDisplayCalc = this._operation.join("")
+    }
 
-        this._operation = [result, last]
+    calc(){
+        
+        let last = this._operation.pop()
+ 
+        let result = eval(this._operation.join(""))
+        
+        if(last=== '%'){
 
+            result /= 100
+
+            this._operation = [result, last]
+
+        }else{
+            
+            this._operation.push(last)
+            this._operation = [result, last]
+             
+
+            this._operation = [result, last]
+            console.log('apoós o last', this._operation, 'last vale: ', last)
+        }
         this.setLastNumberToDisplay()
 
 
@@ -113,11 +148,7 @@ class CalcController{
                 this.setLastNumberToDisplay()
 
             }
-            
-
         }
-        
-        
     }
 
     execButton(value){
@@ -141,7 +172,7 @@ class CalcController{
                 break
 
             case 'arrow':
-                console.log('cliquei na equal')
+                this.clearEntry()
                 break
                 
             case 'ast':
@@ -153,7 +184,7 @@ class CalcController{
                 break
 
             case 'equal':
-                console.log('cliquei na equal')
+                this.calcFromEqual()
                 break
 
             case 'dot':
