@@ -90,7 +90,7 @@ class CalcController{
 
             result /= 100
 
-            this._operation = [result, last]
+            this._operation = [result]
 
         }else{
             
