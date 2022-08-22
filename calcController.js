@@ -110,7 +110,7 @@ class CalcController{
         }
 
         console.log('_lastOperator', this._lastOperator)
-        console.log('_lastNumber', this._lastNumber)
+        console.log('_lastOperator', this._lastOperator)
 
 
         let result = this.getResult()
@@ -167,16 +167,13 @@ class CalcController{
     }
 
     addOperation(value){
-        //console.log('A', isNaN(this.getLastOperation()))
+        console.log("A", value)
         
         if(isNaN(this.getLastOperation())){
-            //console.log('false - type', typeof(value), this._operation)
 
             if(this.isOperator(value)){
-                //console.log('deve ser operador false and true', typeof(value))
                 this.setLastOperation(value)
             }else{
-                //console.log('deve ser um numero false and false', typeof(value))
                 this.pushOperation(value)
                 this.setLastNumberToDisplay()
 
@@ -187,10 +184,8 @@ class CalcController{
             if(this.isOperator(value)){
                 this.pushOperation(value)
             }else{
-                //console.log('addOperation-isNaN false-', value)
                 let newValue = this.getLastOperation().toString() + value.toString()
                 this.setLastOperation(parseInt(newValue))
-                //console.log(this._operation)
                 this.setLastNumberToDisplay()
 
             }
@@ -229,7 +224,7 @@ class CalcController{
                 this.addOperation('-');
                 break
 
-            case 'equal':
+            case 'equal zero':
                 this.calc()
                 break
 
