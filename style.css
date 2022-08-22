@@ -73,6 +73,13 @@ body{
     cursor: pointer;
 }
 
+.btn-equal{
+    grid-column: 2 span;
+    line-height: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
 .grow{
     grid-row: 1 span;
     background:  #69DE5A;

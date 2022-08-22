@@ -224,7 +224,7 @@ class CalcController{
                 this.addOperation('-');
                 break
 
-            case 'equal zero':
+            case 'equal':
                 this.calc()
                 break
 
