@@ -9,6 +9,7 @@ class CalcController{
         this._currentDate
         this.initialize()
         this.initButtonsEvents()
+        //this.initializeKeyboard()
     }
 
     //used to initialize elements
@@ -21,6 +22,10 @@ class CalcController{
         events.split(' ').forEach(event => {
             element.addEventListener(event, fn, false);
         })
+    }
+
+    initializeKeyboard(){
+        document.addEventListener()
     }
 
     clearAll(){
@@ -39,22 +44,16 @@ class CalcController{
 
     }
 
-    
-
-
     setError(){
         this.displayCalc = "ERROR"
     }
 
     getLastOperation(){
         return this._operation[this._operation.length - 1]
-
     }
 
     setLastOperation(value) {
-
         this._operation[this._operation.length - 1] = value;
-
     }
 
     isOperator(value) {
@@ -63,12 +62,8 @@ class CalcController{
 
     pushOperation(value){
         this._operation.push(value)
-
         if(this._operation.length>3){
-            
-
             this.calc()
-
             console.log('this operation', this._operation)
         }
     }
@@ -88,11 +83,8 @@ class CalcController{
 
     calc(){
         let last = '';
-
         this._lastOperator = this.getLastItem();
-
         if (this._operation.length < 3) {
-
             let firstItem = this._operation[0];
             this._operation = [firstItem, this._lastOperator, this._lastNumber];
 
@@ -117,53 +109,60 @@ class CalcController{
         
         
         if(last=== '%'){
-
             result /= 100
-
             this._operation = [result]
 
         }else{
             
             this._operation.push(last)
             this._operation = [result, last]
-             
+            
 
             this._operation = [result, last]
             console.log('apoós o last', this._operation, 'last vale: ', last)
         }
         this.setLastNumberToDisplay()
-
-
     }
 
     getLastItem(isOperator = true) {
-
         let lastItem;
-
         for (let i = this._operation.length - 1; i >= 0; i--) {
-
             if (this.isOperator(this._operation[i]) === isOperator) {
                 lastItem = this._operation[i];
                 break;
             }
-
         }
 
         if (!lastItem) {
-
             lastItem = (isOperator) ? this._lastOperator : this._lastNumber;
-
         }
-
         return lastItem;
-
     }
 
     setLastNumberToDisplay(){
         let lastNumber = this.getLastItem(false)
-        
         this.displayCalc = lastNumber
         this.subDisplayCalc = this._operation.join("")
+    }
+
+    getButton(){
+
+    }
+
+    addDot() {
+
+        let lastOperation = this.getLastOperation();
+
+        if (typeof lastOperation === 'string' && lastOperation.split('').indexOf('.') > -1) return;
+
+        if (this.isOperator(lastOperation) || !lastOperation) {
+            this.setLastOperation('0.');
+        } else {
+            this.setLastOperation(lastOperation.toString() + '.');
+        }
+
+        this.setLastNumberToDisplay();
+
     }
 
     addOperation(value){
@@ -176,7 +175,6 @@ class CalcController{
             }else{
                 this.pushOperation(value)
                 this.setLastNumberToDisplay()
-
             }
 
 
@@ -185,7 +183,7 @@ class CalcController{
                 this.pushOperation(value)
             }else{
                 let newValue = this.getLastOperation().toString() + value.toString()
-                this.setLastOperation(parseInt(newValue))
+                this.setLastOperation(parseFloat(newValue))
                 this.setLastNumberToDisplay()
 
             }
@@ -194,7 +192,6 @@ class CalcController{
 
     execButton(value){
         switch(value){
-
             case 'plus':
                 console.log('plus')
                 this.addOperation('+');
@@ -217,11 +214,11 @@ class CalcController{
                 break
                 
             case 'ast':
-                this.addOperation('*');
+                this.addOperation('*')
                 break
             
             case 'dash':
-                this.addOperation('-');
+                this.addOperation('-')
                 break
 
             case 'equal':
@@ -229,7 +226,8 @@ class CalcController{
                 break
 
             case 'dot':
-                console.log('cliquei na dot')
+                this.addDot()
+                
                 break
                               
 
